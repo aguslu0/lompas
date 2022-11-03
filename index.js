@@ -15,34 +15,22 @@ app.get('/', (req, res) => {
     } catch(error) { console.log(`Error cargando la app: ${error}`); }
 })
 
-app.get('/productos', (req, res) => {
-    const productList = async() => {
-        try {
-            const aProducts = await products.getAll();
-            let productsCards = ``;
+app.get('/productos', async(req, res) => {
+    const aProducts = await products.getAll();
+    let productsCards = ``;
 
-            aProducts.map( item => (
-                productsCards += `<div><h2>${item.title}</h2><p>$${item.price}</p><img height='200px' src='${item.thumbnail}' alt='${item.title}' /></div>`
-            ));
+    aProducts.map( item => (
+        productsCards += `<div><h2>${item.title}</h2><p>$${item.price}</p><img height='200px' src='${item.thumbnail}' alt='${item.title}' /></div>`
+    ));
 
-            res.send(`<h1>LOMPAS Indumentaria</h1> ${productsCards}`);
-        } catch(error) { console.log(`Error al obtener los productos: ${error}`); }
-    }
-
-    productList();
+    res.send(`<h1>LOMPAS Indumentaria</h1> ${productsCards}`);
 });
 
-app.get('/productoRandom', (req, res) => {
-    const randomProduct = async() => {
-        try {
-            const aProducts = await products.getAll();
-            let randomNum = Math.floor(Math.random() * aProducts.length);
+app.get('/productoRandom', async(req, res) => {
+    const aProducts = await products.getAll();
+    let randomNum = Math.floor(Math.random() * aProducts.length);
 
-            res.send(`<h1>${aProducts[randomNum].title}</h1> <p>$${aProducts[randomNum].price}</p> <img height='200px' src='${aProducts[randomNum].thumbnail}' alt='${aProducts[randomNum].title}' />`);
-        } catch(error) { console.log(`Error obteniendo producto random: ${error}`); }
-    }
-
-    randomProduct();
+    res.send(`<h1>${aProducts[randomNum].title}</h1> <p>$${aProducts[randomNum].price}</p> <img height='200px' src='${aProducts[randomNum].thumbnail}' alt='${aProducts[randomNum].title}' />`);
 });
 
 //products.save({ title: "Test", price: 175, thumbnail: "" });
