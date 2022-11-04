@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Lompas</title>
+</head>
+<body>
+    <h1>Lompas</h1>
+    <em>Ropa y accesorios unisex</em>
+
+    <form action="/api/productos" method="POST">
+        <h2>Agregar producto...</h2>
+
+        <label for="title">Nombre:</label>
+        <input type="text" id="title" name="title" />
+        <br />
+
+        <label for="price">Precio:</label>
+        <input type="text" id="price" name="price" />
+        <br /><br />
+
+        <input type="submit" value="Enviar" />
+    </form>
+</body>
+</html>

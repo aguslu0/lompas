@@ -93,6 +93,22 @@ class Contenedor {
         } catch(error) { console.log(`Error obteniendo todos los productos: ${error.message}`); }
     }
 
+    async modifyById(id, newData) {
+        try {
+            let data = await this.readFile(this.archive);
+            let dataId = data.filter(item => item.id === id);
+
+            if(dataId.length === 0) { throw new Error(`Error encontrando el archivo con id: ${id}`); }
+
+            data = data.filter(item => item.id !== id);
+            dataId = { id: id, ...newData };
+            data.push(dataId);
+
+            this.writeFile(this.archive, data);
+            return dataId;
+        } catch(error) { console.log(`Error modificando el producto: ${error.message}`); }
+    }
+
     async deleteById(id) {
         try {
             if(this.exists(this.archive)) {
