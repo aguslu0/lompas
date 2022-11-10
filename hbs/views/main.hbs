@@ -1,0 +1,11 @@
+{{#if aProducts.length }}
+    {{#each aProducts}}
+        <div>
+            <h2>{{this.title}}</h2>
+            <p>${{this.price}}</p>
+            <img height='200px' src='{{this.thumbnail}}' alt='{{this.title}}' />
+        </div>
+    {{/each}}
+{{else}}
+    <h2>No hay productos cargados...</h2>
+{{/if}}

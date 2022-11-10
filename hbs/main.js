@@ -1,6 +1,7 @@
 const contenedor = require('./contenedor.js');
 const express = require('express');
 const { Router } = express;
+const handlebars = require('express-handlebars');
 
 const products = new contenedor("./products.json");
 
@@ -9,20 +10,29 @@ const router = Router();
 
 const PORT = 8080;
 
+app.engine(
+    "hbs",
+    handlebars.engine({
+        extname: "hbs",
+        defaultLayout: "productos.hbs",
+        layoutsDir: __dirname + "/views"
+    })
+);
+
+app.set('views', './views');
+app.set('view engine', 'hbs');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + '/api/productos'))
+app.use(express.static(__dirname + '/public'))
 
 router.get('/', async(req, res) => {
     const aProducts = await products.getAll();
-    let productsCards = ``;
 
-    aProducts.map( item => ( 
-        productsCards += `<div><h2>${item.title}</h2><p>$${item.price}</p><img height='200px' src='${item.thumbnail}' alt='${item.title}' /></div>`
-    ));
-
-    res.send(`<h1>LOMPAS Indumentaria</h1> ${productsCards}`);
+    res.render('main', {
+        aProducts: aProducts 
+    });
 });
 
 router.get('/:id', async(req, res) => {
@@ -30,7 +40,6 @@ router.get('/:id', async(req, res) => {
     const aProduct = await products.getById(productId);
 
     res.json(aProduct);
-    //res.send(`<h1>${aProduct.title}</h1> <p>$${aProduct.price}</p> <img height='200px' src='${aProduct.thumbnail}' alt='${aProduct.title}' />`);
 });
 
 router.post('/', (req, res) => {
@@ -55,7 +64,7 @@ router.delete('/:id', (req, res) => {
     res.send('ok');
 });
 
-app.use('/api/productos', router);
+app.use('/productos', router);
 
 const serv = app.listen(PORT, () => { console.log(`Servidor HTTP escuchando el puerto ${serv.address().port}`); });
 serv.on('error', error => console.log(`Error en el servidor: ${error}`));
