@@ -16,5 +16,10 @@
     "title": "Bermuda Mom",
     "price": 5800,
     "thumbnail": "./assets/img/bermudas_mom/negra.jpg"
+  },
+  {
+    "id": 4,
+    "title": "asd",
+    "price": "2123"
   }
 ]

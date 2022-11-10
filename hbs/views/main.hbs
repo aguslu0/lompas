@@ -1,11 +1,20 @@
+<a href="../" >Cargar productos</a>
+
 {{#if aProducts.length }}
-    {{#each aProducts}}
-        <div>
-            <h2>{{this.title}}</h2>
-            <p>${{this.price}}</p>
-            <img height='200px' src='{{this.thumbnail}}' alt='{{this.title}}' />
-        </div>
-    {{/each}}
+        <table>
+            <tr>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+                <th>IMAGEN</th>
+            </tr>
+            {{#each aProducts}}
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.price}}</td>
+                    <td><img height='100px' src='{{this.thumbnail}}' alt='{{this.title}}' /></td>
+                </tr>
+            {{/each}}
+        </table>
 {{else}}
     <h2>No hay productos cargados...</h2>
 {{/if}}

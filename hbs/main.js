@@ -19,7 +19,7 @@ app.engine(
     })
 );
 
-app.set('views', './views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 
 app.use(express.json());
