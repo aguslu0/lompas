@@ -1,10 +1,13 @@
 const socket = io.connect();
 
 function render(data) {
+    let date = new Date();
+    let dateStr = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
     const html = data.map((element, index) => {
         return(`<div>
             <strong style='color: blue'>${element.email}</strong> 
-            [<span style='color: brown'>16/11/2022 18:20</span>]
+            [<span style='color: brown'>${dateStr}</span>]
             <em style='color: green'>${element.text}</em>
         </div>`);
     }).join(' ');
