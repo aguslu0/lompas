@@ -1,0 +1,47 @@
+<form action="/productos" method="POST">
+    <h2>Agregar producto...</h2>
+
+    <label for="title">Nombre:</label>
+    <input type="text" id="title" name="title" />
+    <br />
+
+    <label for="price">Precio:</label>
+    <input type="text" id="price" name="price" />
+    <br />
+
+    <label for="thumbnail">Foto URL:</label>
+    <input type="text" id="thumbnail" name="thumbnail" />
+    <br /><br />
+
+    <input type="submit" value="Enviar" />
+</form>
+
+<h2>Lista de productos</h2>
+{{#if aProducts.length }}
+        <table>
+            <tr>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+                <th>IMAGEN</th>
+            </tr>
+            {{#each aProducts}}
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.price}}</td>
+                    <td><img height='100px' src='{{this.thumbnail}}' alt='{{this.title}}' /></td>
+                </tr>
+            {{/each}}
+        </table>
+{{else}}
+    <h2>No hay productos cargados...</h2>
+{{/if}}
+
+<h2>Centro de mensajes</h2>
+
+<form onsubmit="return addMessage(this)">
+    <input type="email" placeholder="e-mail..." id="email" />
+    <input type="text" placeholder="Mensaje..." id="text" />
+    <input type="submit" value="Enviar" />
+</form>
+
+<div id="messages"></div>
