@@ -1,5 +1,32 @@
 const socket = io.connect();
 
+function renderProduct(product) {
+    console.log(product);
+
+    const html = `
+        <td>${product.title}</td>
+        <td>${product.price}</td>
+        <td><img height='100px' src='${product.thumbnail}' alt='${product.title}'</td>
+    `;
+
+    document.getElementById('newProducts').innerHTML = html;
+}
+
+socket.on('product', data => {
+    renderProduct(data);
+});
+
+function addProduct() {
+    const product = {
+        title: document.getElementById('title').value,
+        price: document.getElementById('price').value,
+        thumbnail: document.getElementById('thumbnail').value
+    };
+
+    socket.emit('new-product', product);
+    return false;
+}
+
 function renderChat(data) {
     const html = data.map((element, index) => {
         return(`<div>

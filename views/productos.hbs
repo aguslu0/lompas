@@ -1,4 +1,4 @@
-<form action="/productos" method="POST">
+<form onsubmit="return addProduct()">
     <h2>Agregar producto...</h2>
 
     <label for="title">Nombre:</label>
@@ -31,6 +31,7 @@
                     <td><img height='100px' src='{{this.thumbnail}}' alt='{{this.title}}' /></td>
                 </tr>
             {{/each}}
+            <tr id="newProducts"></tr>
         </table>
 {{else}}
     <h2>No hay productos cargados...</h2>

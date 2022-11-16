@@ -84,7 +84,12 @@ serv.on('error', error => console.log(`Error en el servidor: ${error}`));
 
 // Hacemos conexión con sockets
 io.on('connection', function(socket) {
-    console.log('Un cliente se ha conectado');
+    //console.log('Un cliente se ha conectado');
+
+    socket.on('new-product', (data) => {
+        products.save(data);
+        io.sockets.emit('product', data);
+    });
 
     socket.emit('messages', messages);
 
